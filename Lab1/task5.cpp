@@ -1,30 +1,31 @@
 #include <fstream>
 #include <vector>
 #include <queue>
+using namespace std;
 
 enum Checking_status {
     NOT_CHECKED,
     CHECKED
 };
 
-void bfs(std::vector<std::vector<bool>> const &matrix, std::vector<std::pair<int, int>> &vertexes);
+void bfs(vector<vector<bool>> const &matrix, vector<pair<int, int>> &vertexes);
 
 
 int main() {
-    std::ifstream fin("pathbge1.in");
-    std::ofstream fout("pathbge1.out");
+    ifstream fin("pathbge1.in");
+    ofstream fout("pathbge1.out");
     
     int n, m;
     fin >> n >> m;
 
-    std::vector<std::vector<bool>> matrix(n, std::vector<bool>(n, 0));
+    vector<vector<bool>> matrix(n, vector<bool>(n, 0));
     for (size_t i = 0; i < m; ++i) {
         int first_vertex, second_vertex;
         fin >> first_vertex >> second_vertex;
         matrix[first_vertex - 1][second_vertex - 1] = 1;
         matrix[second_vertex - 1][first_vertex - 1] = 1;
     }
-    std::vector<std::pair<int, int>> vertexes(n);
+    vector<pair<int, int>> vertexes(n);
 
     bfs(matrix, vertexes);
     for (size_t i = 0; i < n; ++i) {
@@ -35,9 +36,9 @@ int main() {
 }
 
 
-void bfs(std::vector<std::vector<bool>> const &matrix, std::vector<std::pair<int, int>> &vertexes) {
+void bfs(vector<vector<bool>> const &matrix, vector<pair<int, int>> &vertexes) {
     vertexes[0].first = CHECKED;
-    std::queue<int> vertexes_queue;
+    queue<int> vertexes_queue;
     vertexes_queue.push(0);
 
     while (vertexes_queue.size() != 0) {

@@ -1,13 +1,15 @@
 #include <fstream>
 #include <vector>
+using namespace std;
+
 
 int main() {
-    std::ifstream fin("input.txt");
-    std::ofstream fout("output.txt");
+    ifstream fin("input.txt");
+    ofstream fout("output.txt");
     
     int n, m;
     fin >> n >> m;
-    std::vector<std::vector<bool>> matrix(n, std::vector<bool>(n, 0));
+    vector<vector<bool>> matrix(n, vector<bool>(n, 0));
 
     for (size_t i = 0; i < m; ++i) {
         int first_vertex, second_vertex;

@@ -1,11 +1,12 @@
 #include <fstream>
 #include <vector>
 #include <set>
+using namespace std;
 
 int component_number;
-void dfs(std::vector<std::pair<int, int>> &vertexes, std::vector<std::set<int>> const &adj_list);
-void dfs_visit(std::vector<std::pair<int, int>> &vertexes,\
-               std::vector<std::set<int>> const &adj_list, int index);
+void dfs(vector<pair<int, int>> &vertexes, vector<set<int>> const &adj_list);
+void dfs_visit(vector<pair<int, int>> &vertexes,\
+               vector<set<int>> const &adj_list, int index);
 
 enum Checking_status {
     NOT_CHECKED,
@@ -14,12 +15,12 @@ enum Checking_status {
 
 
 int main() {
-    std::ifstream fin("components.in");
-    std::ofstream fout("components.out");
+    ifstream fin("components.in");
+    ofstream fout("components.out");
     int n, m;
     fin >> n >> m;
 
-    std::vector<std::set<int>> adj_list(n, std::set<int>());
+    vector<set<int>> adj_list(n, set<int>());
     for (size_t i = 0; i < m; ++i) {
         int first_vertex, second_vertex;
         fin >> first_vertex >> second_vertex;
@@ -27,7 +28,7 @@ int main() {
         adj_list[second_vertex - 1].insert(first_vertex - 1);
     }
 
-    std::vector<std::pair<int, int>> vertexes(n);
+    vector<pair<int, int>> vertexes(n);
     dfs(vertexes, adj_list);
     fout << component_number << '\n'; 
     for (size_t i = 0; i < n; ++i) {
@@ -38,7 +39,7 @@ int main() {
 }
 
 
-void dfs(std::vector<std::pair<int, int>> &vertexes, std::vector<std::set<int>> const &adj_list) {
+void dfs(vector<pair<int, int>> &vertexes, vector<set<int>> const &adj_list) {
 
     for (size_t i = 0; i < vertexes.size(); ++i) {
         if (vertexes[i].first == NOT_CHECKED) {
@@ -50,12 +51,12 @@ void dfs(std::vector<std::pair<int, int>> &vertexes, std::vector<std::set<int>> 
 }
 
 
-void dfs_visit(std::vector<std::pair<int, int>> &vertexes,\
-               std::vector<std::set<int>> const &adj_list, int index) {
+void dfs_visit(vector<pair<int, int>> &vertexes,\
+               vector<set<int>> const &adj_list, int index) {
 
     vertexes[index].first = CHECKED;
     vertexes[index].second = component_number;
-    for (std::set<int>::iterator adj = adj_list[index].begin();
+    for (set<int>::iterator adj = adj_list[index].begin();
          adj != adj_list[index].end(); ++adj) {
 
         if (vertexes[*adj].first == NOT_CHECKED) {

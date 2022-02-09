@@ -1,14 +1,14 @@
 #include <fstream>
 #include <vector>
-
+using namespace std;
 
 int main() {
-    std::ifstream fin("input.txt");
-    std::ofstream fout("output.txt");
+    ifstream fin("input.txt");
+    ofstream fout("output.txt");
     
     int n;
     fin >> n;
-    std::vector<std::vector<bool>> matrix(n, std::vector<bool>(n));
+    vector<vector<bool>> matrix(n, vector<bool>(n));
     bool is_correct = true;
     for (size_t i = 0; i < n; ++i) {
         for (size_t j = 0 ; j < n; ++j) {
