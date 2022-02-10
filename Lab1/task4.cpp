@@ -6,7 +6,7 @@ using namespace std;
 int component_number;
 void dfs(vector<pair<int, int>> &vertexes, vector<set<int>> const &adj_list);
 void dfs_visit(vector<pair<int, int>> &vertexes,\
-               vector<set<int>> const &adj_list, int index);
+               vector<set<int>> const &adj_list, int const &index);
 
 enum Checking_status {
     NOT_CHECKED,
@@ -52,7 +52,7 @@ void dfs(vector<pair<int, int>> &vertexes, vector<set<int>> const &adj_list) {
 
 
 void dfs_visit(vector<pair<int, int>> &vertexes,\
-               vector<set<int>> const &adj_list, int index) {
+               vector<set<int>> const &adj_list, int const &index) {
 
     vertexes[index].first = CHECKED;
     vertexes[index].second = component_number;
