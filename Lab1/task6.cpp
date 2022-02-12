@@ -113,17 +113,17 @@ string find_path(vector<Vertex> const &vertexes, int const &exit_point) {
     int curr_index = exit_point;
     int parent_index = vertexes[exit_point].parent;
     while (parent_index != -1) {
-        if (parent_index == curr_index - 1 && parent_index / m == curr_index / m) {
-            path = "R" + path;
-        }
-        else if (parent_index == curr_index - m) {
+        if (parent_index == curr_index - m) {
             path = "D" + path;
         }
-        else if (parent_index == curr_index + 1 && parent_index / m == curr_index / m) {
-            path = "L" + path;
+        else if (parent_index == curr_index - 1) {
+            path = "R" + path;
         }
         else if (parent_index == curr_index + m) {
             path = "U" + path;
+        }
+        else if (parent_index == curr_index + 1 && parent_index / m == curr_index / m) {
+            path = "L" + path;
         }
         curr_index = parent_index;
         parent_index = vertexes[parent_index].parent;
