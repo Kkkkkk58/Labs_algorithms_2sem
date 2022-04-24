@@ -5,6 +5,7 @@ using namespace std;
 
 size_t max_gold_weight(size_t capacity, vector<size_t> const& weights);
 
+
 size_t n;
 int main() {
     ifstream fin("knapsack.in");
@@ -16,10 +17,10 @@ int main() {
     for (size_t i = 0; i < n; ++i) {
         fin >> bars_weights[i];
     }
+
     fout << max_gold_weight(s, bars_weights);
     return 0;
 }
-
 
 
 size_t max_gold_weight(size_t capacity, vector<size_t> const& weights) {
@@ -36,11 +37,6 @@ size_t max_gold_weight(size_t capacity, vector<size_t> const& weights) {
             }
         }
     }
-    // for (size_t i = 0; i < n + 1; ++i) {
-    //     for (size_t j = 0; j < capacity; ++j) {
-    //         cout << max_weights[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
+
     return max_weights[n][capacity];
 }
