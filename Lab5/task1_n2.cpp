@@ -26,20 +26,20 @@ int main() {
 
 
 vector<int> find_lis(vector<int> const& data) {
-    vector<int> lis_lenghts(n, 1);
+    vector<int> lis_lengths(n, 1);
     vector<int> prev(n, -1);
 
     for (size_t i = 1; i < n; ++i) {
         for (size_t j = 0; j < i; ++j) {
-            if (data[i] > data[j] && lis_lenghts[j] + 1 > lis_lenghts[i]) {
-                lis_lenghts[i] = lis_lenghts[j] + 1;
+            if (data[i] > data[j] && lis_lengths[j] + 1 > lis_lengths[i]) {
+                lis_lengths[i] = lis_lengths[j] + 1;
                 prev[i] = j;
             }
         }
     }
 
-    size_t max_length_index = max_element(lis_lenghts.begin(), lis_lenghts.end()) - lis_lenghts.begin();
-    size_t lis_size = lis_lenghts[max_length_index];  
+    size_t max_length_index = max_element(lis_lengths.begin(), lis_lengths.end()) - lis_lengths.begin();
+    size_t lis_size = lis_lengths[max_length_index];  
     vector<int> ans(lis_size);
     for (int curr_element = max_length_index, i = lis_size - 1; curr_element != -1; \
     curr_element = prev[curr_element], --i) {
