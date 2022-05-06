@@ -27,7 +27,7 @@ void build_prefix(string const& text, vector<size_t> &prefix) {
     }
 
     size_t i = 1, j = 0;
-    while (i <= text.size()) {
+    while (i < text.size()) {
         if (text[i] == text[j]) {
             prefix[i + 1] = j + 1;
             ++i;
