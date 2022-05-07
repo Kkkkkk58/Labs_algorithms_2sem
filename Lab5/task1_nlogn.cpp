@@ -48,8 +48,7 @@ vector<int> find_lis(vector<int> const& data, size_t& curr_len) {
     }
     
     vector<int> ans(curr_len);
-    for (int curr_index = indexes[curr_len - 1], i = curr_len - 1; curr_index != -1; \
-    curr_index = prev[curr_index], --i) {
+    for (int curr_index = indexes[curr_len - 1], i = curr_len - 1; curr_index != -1; curr_index = prev[curr_index], --i) {
         ans[i] = data[curr_index];
     }
     return ans;
