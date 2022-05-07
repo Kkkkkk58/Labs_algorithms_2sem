@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <limits>
 #include <algorithm>
 using namespace std;
 
@@ -41,8 +40,7 @@ vector<int> find_lis(vector<int> const& data) {
     size_t max_length_index = max_element(lis_lengths.begin(), lis_lengths.end()) - lis_lengths.begin();
     size_t lis_size = lis_lengths[max_length_index];  
     vector<int> ans(lis_size);
-    for (int curr_element = max_length_index, i = lis_size - 1; curr_element != -1; \
-    curr_element = prev[curr_element], --i) {
+    for (int curr_element = max_length_index, i = lis_size - 1; curr_element != -1; curr_element = prev[curr_element], --i) {
         ans[i] = data[curr_element];
     }
     return ans;
