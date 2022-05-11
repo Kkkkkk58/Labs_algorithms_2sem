@@ -11,13 +11,13 @@ size_t n;
 
 struct Node {
     Node(char s, Node *p = nullptr) : symbol(s), parent(p) {}
-    ~Node() {
-        for (size_t i = 0; i < n; ++i) {
-            delete successors[i];
-        }
-    }
+    // ~Node() {
+    //     for (size_t i = 0; i < n; ++i) {
+    //         delete successors[i];
+    //     }
+    // }
 
-    int pattern_index = -1; 
+    vector<size_t> pattern_index; 
     bool is_terminal = false;
     Node *parent = nullptr;
     Node *suffix_link = nullptr;
@@ -49,9 +49,9 @@ public:
         return occurences;
     }
 
-    ~Trie() {
-        delete root;
-    }
+    // ~Trie() {
+    //     delete root;
+    // }
 private:
 
     void add_pattern(string const& pattern, size_t order) {
@@ -63,7 +63,7 @@ private:
             curr = curr->successors[symbol - 'a'];
         }
         curr->is_terminal = true;
-        curr->pattern_index = order;    
+        curr->pattern_index.push_back(order);
     }
 
     Node *get_suffix_link(Node *node) {
@@ -112,7 +112,11 @@ private:
         Node *curr = node;
         while (curr != root) {
             if (curr->is_terminal) {
-                occurences[curr->pattern_index] = true;
+                curr->is_terminal = false;
+                for (size_t index : curr->pattern_index) {
+                    occurences[index] = true;
+                }
+                //occurences[curr->pattern_index] = true;
             }
             curr = get_short_link(curr);
         }
