@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <queue>
 using namespace std;
 
 const size_t LETTERS_COUNT = 26;
@@ -11,12 +12,6 @@ size_t n;
 
 struct Node {
     Node(char s, Node *p = nullptr) : symbol(s), parent(p) {}
-    // ~Node() {
-    //     for (size_t i = 0; i < n; ++i) {
-    //         delete successors[i];
-    //     }
-    // }
-
     vector<size_t> pattern_index; 
     bool is_terminal = false;
     Node *parent = nullptr;
@@ -25,6 +20,7 @@ struct Node {
     vector<Node *> successors = vector<Node *>(LETTERS_COUNT); 
     vector<Node *> moves = vector<Node *>(LETTERS_COUNT);
     char symbol;
+    bool visited = false;
 };
 
 
@@ -44,14 +40,13 @@ public:
         Node *state = root;
         for (char symbol : text) {
             state = get_move(state, symbol);
-            mark(state, occurences);
+            if (!state->visited) {
+                mark(state, occurences);
+            }
         }
         return occurences;
     }
 
-    // ~Trie() {
-    //     delete root;
-    // }
 private:
 
     void add_pattern(string const& pattern, size_t order) {
@@ -116,8 +111,9 @@ private:
                 for (size_t index : curr->pattern_index) {
                     occurences[index] = true;
                 }
-                //occurences[curr->pattern_index] = true;
+               
             }
+            curr->visited = true;
             curr = get_short_link(curr);
         }
     }
